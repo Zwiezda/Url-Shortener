@@ -12,21 +12,24 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 
 from pathlib import Path
 
+from environ import environ
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+env = environ.Env()
+environ.Env.read_env()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-!o_6#1_#qrb3p9o9=amq1zjawfy%$ez8g92noq0!4%^p5=)vl9'
+SECRET_KEY = env('SECRET_KEY', default='django-insecure-!o_6#1_#qrb3p9o9=amq1zjawfy%$ez8g92noq0!4%^p5=)vl9')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -37,6 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    "url_manager",
+    'api',
 ]
 
 MIDDLEWARE = [
@@ -116,3 +122,21 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+
+API_PREFIX = env('API_PREFIX', default='api/')
+
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer',
+    ],
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
+    'PAGE_SIZE': 25,
+    'DATETIME_FORMAT': '%Y-%m-%d %H:%M:%S',
+    'DATETIME_INPUT_FORMATS ': ['%Y-%m-%d %H:%M:%S', ],
+    'ORDERING_PARAM': 'sort_by',
+}
+
+
+SHORTENER = env('SHORTENER', default='url_manager.services.shorteners.Char8Shortener')
+SHORTENER_CACHE_TTL = int(env('SHORTENER_CACHE_TTL', default=3600))

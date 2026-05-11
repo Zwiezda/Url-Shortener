@@ -1,0 +1,11 @@
+[
+  {
+        "model": "url_manager.shorturl",
+        "pk": 1,
+        "fields": {
+            "short_name": "as1234",
+            "url": "https://www.google.com",
+            "created_at": "2026-05-12T00:00:00Z"
+        }
+    }
+]
