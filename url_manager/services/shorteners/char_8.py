@@ -15,7 +15,6 @@ class Char8Shortener(BaseShortener):
         self._snowflake_generator = snowflake_generator or SnowflakeGenerator(1)
 
     def encode(self, url: str) -> str:
-        encoded_id = next(self._snowflake_generator)
-        encoded_id = self._hash_ids.encode(encoded_id)
+        encoded_id = self._hash_ids.encode(next(self._snowflake_generator))
         logger.debug(f"Encoding {url} to {encoded_id}")
         return encoded_id
