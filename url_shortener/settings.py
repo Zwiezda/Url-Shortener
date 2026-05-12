@@ -139,4 +139,5 @@ REST_FRAMEWORK = {
 
 
 SHORTENER = env('SHORTENER', default='url_manager.services.shorteners.Char8Shortener')
+SHORTENER_CACHE_NAME = env('SHORTENER_CACHE_NAME', default='default')
 SHORTENER_CACHE_TTL = int(env('SHORTENER_CACHE_TTL', default=3600))

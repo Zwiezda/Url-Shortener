@@ -6,7 +6,8 @@ from url_manager.models import ShortUrl
 
 
 class UrlManager:
-    def __init__(self,  cache_name: str | None = 'default', cache_ttl: int = settings.SHORTENER_CACHE_TTL):
+    def __init__(self,  cache_name: str | None = settings.SHORTENER_CACHE_NAME,
+                 cache_ttl: int = settings.SHORTENER_CACHE_TTL):
         self._cache = None
         self._cache_ttl = cache_ttl
         if cache_name:
