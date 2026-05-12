@@ -8,7 +8,7 @@ from url_manager.exceptions import ShortenerNotFoundException
 
 class BaseShortener(ABC):
     @abstractmethod
-    def encode(self, identifier: int) -> str:
+    def encode(self, url: str) -> str:
         pass
 
 
