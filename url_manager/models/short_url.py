@@ -3,7 +3,7 @@ from django.utils import timezone
 
 
 class ShortUrl(models.Model):
-    short_name = models.SlugField(unique=True, null=True)
+    short_name = models.SlugField(unique=True)
     url = models.URLField()
     created_at = models.DateTimeField(verbose_name='Created at', default=timezone.now)
 
