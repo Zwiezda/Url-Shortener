@@ -10,7 +10,7 @@ logger = logging.getLogger(__name__)
 
 
 class Char8Shortener(BaseShortener):
-    def __init__(self, hash_ids: Hashids | None = None, snowflake_generator: SnowflakeGenerator | None = None,):
+    def __init__(self, hash_ids: Hashids | None = None, snowflake_generator: SnowflakeGenerator | None = None):
         self._hash_ids = hash_ids or Hashids(salt=settings.SECRET_KEY, min_length=8)
         self._snowflake_generator = snowflake_generator or SnowflakeGenerator(1)
 
